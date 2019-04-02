@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loading"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    <TableLayout android:id="@+id/details"
+    android:gravity="center">
+
+    <TableLayout
+        android:id="@+id/details"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:stretchColumns="1"
-        >
+        android:stretchColumns="1">
+
         <TableRow>
+
             <TextView android:text="UserName:" />
+
             <EditText android:id="@+id/username" />
-        </TableRow>
-        <TableRow>
-            <TextView android:text="Password:" />
-            <EditText android:id="@+id/password" />
+
+
         </TableRow>
 
-        <Button android:id="@+id/save"
-            android:layout_width="fill_parent"
+        <TableRow>
+
+            <TextView android:text="Password:" />
+
+            <EditText android:id="@+id/password"
+                android:inputType="textPassword"
+                />
+        </TableRow>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
-            />
+            android:text="Login" />
     </TableLayout>
-    <ListView android:id="@+id/restaurants"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_above="@id/details"
-        />
+
 </RelativeLayout>

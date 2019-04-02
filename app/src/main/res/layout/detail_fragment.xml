@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DetailFragment">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/cau"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.09"
+                android:text="Cau 1" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="90:00"
+
+                />
+
+            <Button
+                android:id="@+id/send"
+                style="@style/Widget.AppCompat.Button"
+
+
+                android:text="Nop bai" />
+
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="DetailFragment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/ans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/A"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A" />
+
+            <RadioButton
+                android:id="@+id/B"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B" />
+
+            <RadioButton
+                android:id="@+id/C"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C" />
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TableRow>
+
+
+            <Button
+
+                android:id="@+id/a0"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+
+
+                android:onClick="add"
+                android:textColor="#696969"
+                android:text="01"
+                android:textSize="15dp"
+                tools:background="#696969"
+                tools:ignore="OnClick" />
+
+            <Button
+
+                android:id="@+id/a1"
+
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="02"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+
+
+                android:id="@+id/a2"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="03"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a3"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="04"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a4"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="05"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a5"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="06"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a6"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="07"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a7"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="08"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a8"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="09"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a9"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="10"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+        </TableRow>
+
+        <TableRow>
+
+
+            <Button
+                android:id="@+id/a10"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="11"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a11"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="12"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a12"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="13"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a13"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="14"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a14"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="15"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a15"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="16"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a16"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="17"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a17"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="18"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a18"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="19"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a19"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="20"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+        </TableRow>
+
+        <TableRow>
+
+
+            <Button
+                android:id="@+id/a20"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="21"
+                android:textColor="#696969"
+                android:textSize="15dp"
+
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a21"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="22"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a22"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="23"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a23"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="24"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a24"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="25"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a25"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="26"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a26"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="27"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a27"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="28"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a28"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="29"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a29"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="30"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+        </TableRow>
+
+        <TableRow>
+
+
+            <Button
+                android:id="@+id/a30"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="31"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a31"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="32"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a32"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="33"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a33"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="34"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a34"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="35"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a35"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="36"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a36"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="37"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a37"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="38"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a38"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="39"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a39"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="40"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+        </TableRow>
+
+        <TableRow>
+
+
+            <Button
+                android:id="@+id/a40"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="41"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a41"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="42"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a42"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="43"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a43"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="44"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a44"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="45"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a45"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="46"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a46"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="47"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a47"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="48"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a48"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="49"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+
+            <Button
+                android:id="@+id/a49"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_height="30dp"
+                android:layout_weight=".1"
+                android:onClick="add"
+                android:text="50"
+                android:textColor="#696969"
+                android:textSize="15dp"
+                tools:ignore="OnClick" />
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</RelativeLayout>

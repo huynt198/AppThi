@@ -137,6 +137,14 @@ public class Main2Activity extends AppCompatActivity
 //        }
         else if (id == R.id.contact) {
 
+        }else if(id==R.id.logout){
+            if((new UserHelper(this)).delete(CONST.user.getEmail())>0);{
+                CONST.user = new User();
+                Intent intent = new Intent(Main2Activity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -247,6 +255,9 @@ public class Main2Activity extends AppCompatActivity
                     a.setST1(((JSONObject) answer.getJSONObject(0)).getString("A"));
                     a.setST2(((JSONObject) answer.getJSONObject(1)).getString("B"));
                     a.setST3(((JSONObject) answer.getJSONObject(2)).getString("C"));
+                    if(question.has("url")) a.setImg(question.getString("url"));
+                    else  a.setImg("");
+
                     CONST.exam[i] = a;
 
                 }
@@ -258,6 +269,7 @@ public class Main2Activity extends AppCompatActivity
                     ag.setST2("asdf");
                     ag.setQuestion("324324");
                     ag.setST3("Wdgf");
+                    ag.setImg("");
                     CONST.exam[j] = ag;
 
                 }

@@ -36,5 +36,14 @@
                 android:title="Contact" />
         </menu>
     </item>
+    <item android:title="Logout">
+        <menu>
+            <item
+                android:id="@+id/logout"
+
+                android:title="Logout" />
+
+        </menu>
+    </item>
 
 </menu>

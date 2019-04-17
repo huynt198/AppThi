@@ -3,6 +3,7 @@ package com.example.thi;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.greenrobot.greendao.AbstractDaoMaster;
+import org.greenrobot.greendao.database.Database;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,106 +37,114 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+    UserHelper helper;
+    Cursor model = null;
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        helper.close();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        helper = new UserHelper(this);
+        model = helper.getUser();
 
-        CONST.user.setToken("");
-        if (CONST.user.getToken().length() > 0) {
-            Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-            startActivity(intent);
-        }
-        Button save = (Button) findViewById(R.id.save);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (!model.moveToNext()) {
+            Button save = (Button) findViewById(R.id.save);
+            save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                //open dialog loading
-                final ProgressDialog progress;
-                progress = new ProgressDialog(MainActivity.this);
-                progress.setTitle("Loading");
-                progress.setMessage("Wait while loading...");
-                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-                progress.show();
+                    //open dialog loading
+                    final ProgressDialog progress;
+                    progress = new ProgressDialog(MainActivity.this);
+                    progress.setTitle("Loading");
+                    progress.setMessage("Wait while loading...");
+                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                    progress.show();
 // To dismiss the dialog
 //                progress.dismiss();
-                Log.d("test", "-------------------------------------------------------");
-                RequestQueue que;
-                Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
-                Network network = new BasicNetwork(new HurlStack());
-                que = new RequestQueue(cache, network);
-                que.start();
+                    Log.d("test", "-------------------------------------------------------");
+                    RequestQueue que;
+                    Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
+                    Network network = new BasicNetwork(new HurlStack());
+                    que = new RequestQueue(cache, network);
+                    que.start();
 
 
-                JSONObject jsonBody = new JSONObject();
-                try {
-                    jsonBody.put("email", ((TextView) findViewById(R.id.username)).getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    jsonBody.put("pass", ((TextView) findViewById(R.id.password)).getText().toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String url = "http://thionline-test.herokuapp.com/api/login";
+                    JSONObject jsonBody = new JSONObject();
+                    try {
+                        jsonBody.put("email", ((TextView) findViewById(R.id.username)).getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        jsonBody.put("pass", ((TextView) findViewById(R.id.password)).getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    String url = "http://thionline-test.herokuapp.com/api/login";
 
-                JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("ereeeeeee", response.toString());
-                        try {
+                    JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("ereeeeeee", response.toString());
+                            try {
 
 
-                            if (response.get("data").toString().length() > 0) {
-                                CONST.user.setToken(response.get("data").toString());
-                                CONST.user.setName(response.get("name").toString());
+                                if (response.get("data").toString().length() > 0) {
+                                    CONST.user.setToken(response.get("data").toString());
+                                    CONST.user.setName(response.get("name").toString());
+                                    CONST.user.setEmail(((TextView) findViewById(R.id.username)).getText().toString());
 //                                ((TextView) findViewById(R.id.nameuser)).setText(response.get("name").toString());
-                                Log.d("res", "thanh cong");
-                                Toast.makeText(MainActivity.this, "dang nhap thanh cong", Toast.LENGTH_LONG);
-                                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-                                startActivity(intent);
-                                finish();
+                                    Log.d("res", "thanh cong");
+                                    Toast.makeText(MainActivity.this, "dang nhap thanh cong", Toast.LENGTH_LONG);
+                                    helper.insert(CONST.user);
+                                    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                                    startActivity(intent);
+                                    finish();
 
+                                    progress.dismiss();
+                                } else {
+                                    Log.d("res", "Loi");
+                                    progress.dismiss();
+                                    Toast.makeText(MainActivity.this, "Loi dang nhap:  ", Toast.LENGTH_SHORT).show();
+                                }
+
+                            } catch (JSONException e) {
                                 progress.dismiss();
-                            } else {
                                 Log.d("res", "Loi");
-                                progress.dismiss();
-                                Toast.makeText(MainActivity.this, "Loi dang nhap:  ", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
                             }
 
-                        } catch (JSONException e) {
-                            progress.dismiss();
-                            Log.d("res", "Loi");
-                            e.printStackTrace();
+
                         }
-
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progress.dismiss();
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-                        alertDialogBuilder.setCancelable(true);
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            progress.dismiss();
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                            alertDialogBuilder.setCancelable(true);
 //                        alertDialogBuilder.setIcon(R.drawable.ic_menu_send);
 
-                        alertDialogBuilder.setMessage("Loi ket noi");
-                        alertDialogBuilder.show();
+                            alertDialogBuilder.setMessage("Loi ket noi");
+                            alertDialogBuilder.show();
 //                        onBackPressed();
 
-                    }
-                }) {
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        final Map<String, String> headers = new HashMap<>();
-                        headers.put("Authorization", "Beare " + CONST.user.getToken());//put your token here
-                        return headers;
-                    }
-                };
-                que.add(jsonOblect);
+                        }
+                    }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            final Map<String, String> headers = new HashMap<>();
+                            headers.put("Authorization", "Beare ");//put your token here
+                            return headers;
+                        }
+                    };
+                    que.add(jsonOblect);
 
 
 //                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -161,9 +172,18 @@ public class MainActivity extends AppCompatActivity {
 //                        });
 //                que.add(stringRequest);
 
-            }
-        });
+                }
+            });
+        } else {
+            System.out.println(model.getString(4)+"mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+            CONST.user.setName(model.getString(1));
+            CONST.user.setToken(model.getString(4));
+            Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+            startActivity(intent);
+            finish();
 
-
+        }
     }
+
+
 }

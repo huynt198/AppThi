@@ -4,21 +4,34 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ThiTuDo"></activity>
-        <activity android:name=".detail" />
+        <activity
+            android:name=".ThiTuDo"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+
+            ></activity>
+        <activity
+            android:name=".detail"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".Main2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Home" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".Home"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -5,16 +5,24 @@
     android:id="@+id/detail"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+
     tools:context=".ui.detail.DetailFragment">
 
     <TableLayout
+        android:id="@+id/cauhoi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:paddingTop="10dp">
 
 
         <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="-8dp"
+            android:layout_marginRight="-8dp"
+            android:layout_marginBottom="-8dp">
 
             <TextView
                 android:id="@+id/cau"
@@ -41,55 +49,73 @@
                 android:text="Nop bai" />
 
         </TableRow>
+
+        <TableRow>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/cauhoi"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+
+
+                >
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:maxHeight="200dp"
+                    android:maxWidth="200dp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DetailFragment"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/ans"
+                    android:layout_width="417dp"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/A"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A" />
+
+                    <RadioButton
+                        android:id="@+id/B"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B" />
+
+                    <RadioButton
+                        android:id="@+id/C"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="C" />
+                </RadioGroup>
+
+
+            </LinearLayout>
+        </TableRow>
     </TableLayout>
 
-    <LinearLayout
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:text="DetailFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioGroup
-            android:id="@+id/ans"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/A"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="A" />
-
-            <RadioButton
-                android:id="@+id/B"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="B" />
-
-            <RadioButton
-                android:id="@+id/C"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="C" />
-        </RadioGroup>
-
-
-    </LinearLayout>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+       >
 
         <TableRow>
 
@@ -98,29 +124,35 @@
 
                 android:id="@+id/a0"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
 
-                android:layout_height="30dp"
                 android:layout_weight=".1"
-
-
                 android:onClick="add"
-                android:textColor="#696969"
                 android:text="01"
-                android:textSize="15dp"
-                tools:background="#696969"
+                android:textColor="#696969"
+                android:textSize="15sp"
                 tools:ignore="OnClick" />
 
             <Button
 
                 android:id="@+id/a1"
-
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
+
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="02"
                 android:textColor="#696969"
-                android:textSize="15dp"
+                android:textSize="15sp"
+                tools:background="#45725A5A"
                 tools:ignore="OnClick" />
 
             <Button
@@ -128,18 +160,26 @@
 
                 android:id="@+id/a2"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="03"
                 android:textColor="#696969"
                 android:textSize="15dp"
+                tools:background="#45725A5A"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a3"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="04"
@@ -150,7 +190,10 @@
             <Button
                 android:id="@+id/a4"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="05"
@@ -161,7 +204,10 @@
             <Button
                 android:id="@+id/a5"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="06"
@@ -172,7 +218,10 @@
             <Button
                 android:id="@+id/a6"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="07"
@@ -183,7 +232,10 @@
             <Button
                 android:id="@+id/a7"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="08"
@@ -194,7 +246,10 @@
             <Button
                 android:id="@+id/a8"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="09"
@@ -205,7 +260,10 @@
             <Button
                 android:id="@+id/a9"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="10"
@@ -220,7 +278,10 @@
             <Button
                 android:id="@+id/a10"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="11"
@@ -231,7 +292,10 @@
             <Button
                 android:id="@+id/a11"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="12"
@@ -242,7 +306,10 @@
             <Button
                 android:id="@+id/a12"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="13"
@@ -253,7 +320,10 @@
             <Button
                 android:id="@+id/a13"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="14"
@@ -264,7 +334,10 @@
             <Button
                 android:id="@+id/a14"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="15"
@@ -275,7 +348,10 @@
             <Button
                 android:id="@+id/a15"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="16"
@@ -286,7 +362,10 @@
             <Button
                 android:id="@+id/a16"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="17"
@@ -297,7 +376,10 @@
             <Button
                 android:id="@+id/a17"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="18"
@@ -308,7 +390,10 @@
             <Button
                 android:id="@+id/a18"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="19"
@@ -319,7 +404,10 @@
             <Button
                 android:id="@+id/a19"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="20"
@@ -334,7 +422,10 @@
             <Button
                 android:id="@+id/a20"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="21"
@@ -346,7 +437,10 @@
             <Button
                 android:id="@+id/a21"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="22"
@@ -357,7 +451,10 @@
             <Button
                 android:id="@+id/a22"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="23"
@@ -368,7 +465,10 @@
             <Button
                 android:id="@+id/a23"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="24"
@@ -379,7 +479,10 @@
             <Button
                 android:id="@+id/a24"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="25"
@@ -390,7 +493,10 @@
             <Button
                 android:id="@+id/a25"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="26"
@@ -401,7 +507,10 @@
             <Button
                 android:id="@+id/a26"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="27"
@@ -412,7 +521,10 @@
             <Button
                 android:id="@+id/a27"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="28"
@@ -423,7 +535,10 @@
             <Button
                 android:id="@+id/a28"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="29"
@@ -434,7 +549,10 @@
             <Button
                 android:id="@+id/a29"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="30"
@@ -449,7 +567,10 @@
             <Button
                 android:id="@+id/a30"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="31"
@@ -460,7 +581,10 @@
             <Button
                 android:id="@+id/a31"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="32"
@@ -471,7 +595,10 @@
             <Button
                 android:id="@+id/a32"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="33"
@@ -482,7 +609,10 @@
             <Button
                 android:id="@+id/a33"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="34"
@@ -493,7 +623,10 @@
             <Button
                 android:id="@+id/a34"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="35"
@@ -504,7 +637,10 @@
             <Button
                 android:id="@+id/a35"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="36"
@@ -515,7 +651,10 @@
             <Button
                 android:id="@+id/a36"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="37"
@@ -526,7 +665,10 @@
             <Button
                 android:id="@+id/a37"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="38"
@@ -537,7 +679,10 @@
             <Button
                 android:id="@+id/a38"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="39"
@@ -548,7 +693,10 @@
             <Button
                 android:id="@+id/a39"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="40"
@@ -563,7 +711,10 @@
             <Button
                 android:id="@+id/a40"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="41"
@@ -574,7 +725,10 @@
             <Button
                 android:id="@+id/a41"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="42"
@@ -585,7 +739,10 @@
             <Button
                 android:id="@+id/a42"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="43"
@@ -596,7 +753,10 @@
             <Button
                 android:id="@+id/a43"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="44"
@@ -607,7 +767,10 @@
             <Button
                 android:id="@+id/a44"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="45"
@@ -618,7 +781,10 @@
             <Button
                 android:id="@+id/a45"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="46"
@@ -629,7 +795,10 @@
             <Button
                 android:id="@+id/a46"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="47"
@@ -640,7 +809,10 @@
             <Button
                 android:id="@+id/a47"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="48"
@@ -651,7 +823,10 @@
             <Button
                 android:id="@+id/a48"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="49"
@@ -662,7 +837,10 @@
             <Button
                 android:id="@+id/a49"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-8dp"
+                android:layout_marginRight="-8dp"
+                android:layout_marginBottom="-8dp"
                 android:layout_weight=".1"
                 android:onClick="add"
                 android:text="50"

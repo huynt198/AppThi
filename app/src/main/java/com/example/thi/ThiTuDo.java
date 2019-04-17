@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +42,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.thi.CONST.url;
+
 public class ThiTuDo<a> extends AppCompatActivity {
     Integer a2;
     Integer sec = 59000;
@@ -46,7 +51,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
     Question que = new Question();
     private View[] a = new View[50];
     private TextView cau;
-    int flag=0;
+    int flag = 0;
     JSONArray result = new JSONArray();
 
     @Override
@@ -89,7 +94,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
             public void onClick(View v) {
                 select();
                 send();
-                flag=9;
+                flag = 9;
             }
         });
 
@@ -138,7 +143,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
 
     private void send() {
         System.out.println(result.toString());
-        if (min >=30) {
+        if (min >= 30) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ThiTuDo.this);
             alertDialogBuilder.setCancelable(true);
 //                        alertDialogBuilder.setIcon(R.drawable.ic_menu_send);
@@ -164,7 +169,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, CONST.url + "check_result", re, new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url + "check_result", re, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     progress.cancel();
@@ -172,7 +177,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
                     AlertDialog.Builder aw = new AlertDialog.Builder(ThiTuDo.this);
                     aw.setTitle("Ket qua");
                     try {
-                        aw.setMessage(response.get("message").toString()+"\nVui long xem ket qua chi tiet trong myExam");
+                        aw.setMessage(response.get("message").toString() + "\nVui long xem ket qua chi tiet trong myExam");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -223,11 +228,19 @@ public class ThiTuDo<a> extends AppCompatActivity {
 
         select();
         ((RadioGroup) findViewById(R.id.ans)).clearCheck();
-         a2 = findIndex(a, view);
+        a2 = findIndex(a, view);
 
         Integer a3 = a2 + 1;
         cau.setText("Cau " + a3.toString() + ":");
         que = CONST.exam[a2];
+        if (!que.getImg().equals("")) {
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            ((ImageView) findViewById(R.id.image)).setVisibility(View.VISIBLE);
+            Picasso.with(this).load(que.getImg())
+                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                    .into((ImageView) findViewById(R.id.image));
+        } else ((ImageView) findViewById(R.id.image)).setVisibility(View.GONE);
+
         ((TextView) findViewById(R.id.message)).setText(que.getQuestion());
         ((RadioButton) findViewById(R.id.A)).setText("A :" + que.getST1());
         ((RadioButton) findViewById(R.id.B)).setText("B :" + que.getST2());

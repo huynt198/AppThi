@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,12 +54,31 @@ public class ThiTuDo<a> extends AppCompatActivity {
     private TextView cau;
     int flag = 0;
     JSONArray result = new JSONArray();
+    Boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Ban dang thi, nhan laan nua de thoat", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 1000);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_fragment);
-
 
         for (int i = 0; i < 50; i++) {
             JSONObject ao = new JSONObject();
@@ -75,7 +95,8 @@ public class ThiTuDo<a> extends AppCompatActivity {
             String ad = "a" + String.valueOf(i);
             int resID = getResources().getIdentifier(ad, "id", getPackageName());
             a[i] = (Button) findViewById(resID);
-            PorterDuffColorFilter redFilter = new PorterDuffColorFilter(Color.parseColor("#CDC9C9"), PorterDuff.Mode.MULTIPLY);
+            PorterDuffColorFilter redFilter = new PorterDuffColorFilter(Color.parseColor("#CDC9C9"),
+                    PorterDuff.Mode.MULTIPLY);
             a[i].getBackground().setColorFilter(redFilter);
             result.put((Object) ao);
 
@@ -129,7 +150,6 @@ public class ThiTuDo<a> extends AppCompatActivity {
                     @Override
                     public void onFinish() {
 
-
                         if (flag == 0)
                             send();
                     }
@@ -146,7 +166,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
         if (min >= 30) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ThiTuDo.this);
             alertDialogBuilder.setCancelable(true);
-//                        alertDialogBuilder.setIcon(R.drawable.ic_menu_send);
+            // alertDialogBuilder.setIcon(R.drawable.ic_menu_send);
 
             alertDialogBuilder.setMessage("Chua den gio nop bai!");
             alertDialogBuilder.show();
@@ -169,54 +189,56 @@ public class ThiTuDo<a> extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url + "check_result", re, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    progress.cancel();
-
-                    AlertDialog.Builder aw = new AlertDialog.Builder(ThiTuDo.this);
-                    aw.setTitle("Ket qua");
-                    try {
-                        aw.setMessage(response.get("message").toString() + "\nVui long xem ket qua chi tiet trong myExam");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    aw.setCancelable(false);
-                    aw.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-
+            JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url + "check_result", re,
+                    new Response.Listener<JSONObject>() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(ThiTuDo.this, Main2Activity.class);
-                            startActivity(intent);
-                            finish();
+                        public void onResponse(JSONObject response) {
+                            progress.cancel();
+
+                            AlertDialog.Builder aw = new AlertDialog.Builder(ThiTuDo.this);
+                            aw.setTitle("Ket qua");
+                            try {
+                                aw.setMessage(response.get("message").toString()
+                                        + "\nVui long xem ket qua chi tiet trong myExam");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            aw.setCancelable(false);
+                            aw.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent(ThiTuDo.this, Main2Activity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                            aw.show();
                         }
-                    });
-                    aw.show();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    progress.cancel();
-
-                    AlertDialog.Builder aw = new AlertDialog.Builder(ThiTuDo.this);
-                    aw.setTitle("Loi ket noi");
-                    aw.setMessage("Vui long kiem tra ket noi. Thu lai?");
-                    aw.setCancelable(false);
-                    aw.setPositiveButton("ok", new DialogInterface.OnClickListener() {
-
+                    }, new Response.ErrorListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            send();
-                        }
-                    });
-                    aw.show();
+                        public void onErrorResponse(VolleyError error) {
+                            progress.cancel();
 
-                }
-            }) {
+                            AlertDialog.Builder aw = new AlertDialog.Builder(ThiTuDo.this);
+                            aw.setTitle("Loi ket noi");
+                            aw.setMessage("Vui long kiem tra ket noi. Thu lai?");
+                            aw.setCancelable(false);
+                            aw.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    send();
+                                }
+                            });
+                            aw.show();
+
+                        }
+                    }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     final Map<String, String> headers = new HashMap<>();
-                    headers.put("Authorization", "Beare " + CONST.user.getToken());//put your token here
+                    headers.put("Authorization", "Beare " + CONST.user.getToken());// put your token here
                     return headers;
                 }
             };
@@ -236,10 +258,10 @@ public class ThiTuDo<a> extends AppCompatActivity {
         if (!que.getImg().equals("")) {
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             ((ImageView) findViewById(R.id.image)).setVisibility(View.VISIBLE);
-            Picasso.with(this).load(que.getImg())
-                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+            Picasso.with(this).load(que.getImg()).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                     .into((ImageView) findViewById(R.id.image));
-        } else ((ImageView) findViewById(R.id.image)).setVisibility(View.GONE);
+        } else
+            ((ImageView) findViewById(R.id.image)).setVisibility(View.GONE);
 
         ((TextView) findViewById(R.id.message)).setText(que.getQuestion());
         ((RadioButton) findViewById(R.id.A)).setText("A :" + que.getST1());
@@ -252,7 +274,6 @@ public class ThiTuDo<a> extends AppCompatActivity {
     private void checked() {
         for (int i = 0; i < result.length(); i++) {
             try {
-
 
                 JSONObject ed = (JSONObject) result.getJSONObject(i);
                 if (ed.get("id").equals(que.getId())) {
@@ -274,7 +295,6 @@ public class ThiTuDo<a> extends AppCompatActivity {
                     }
                 }
 
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -287,38 +307,37 @@ public class ThiTuDo<a> extends AppCompatActivity {
 
         RadioGroup ans = (RadioGroup) findViewById(R.id.ans);
 
-
         switch (ans.getCheckedRadioButtonId()) {
 
-            case R.id.A:
-                try {
-                    jsonBody.put("answer", ((RadioButton) findViewById(R.id.A)).getText());
-                    jsonBody.put("id", que.getId());
-                    ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.B:
-                try {
-                    jsonBody.put("answer", ((RadioButton) findViewById(R.id.B)).getText());
-                    jsonBody.put("id", que.getId());
-                    ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.C:
-                try {
-                    jsonBody.put("answer", ((RadioButton) findViewById(R.id.C)).getText());
-                    jsonBody.put("id", que.getId());
-                    ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
+        case R.id.A:
+            try {
+                jsonBody.put("answer", ((RadioButton) findViewById(R.id.A)).getText());
+                jsonBody.put("id", que.getId());
+                ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            break;
+        case R.id.B:
+            try {
+                jsonBody.put("answer", ((RadioButton) findViewById(R.id.B)).getText());
+                jsonBody.put("id", que.getId());
+                ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            break;
+        case R.id.C:
+            try {
+                jsonBody.put("answer", ((RadioButton) findViewById(R.id.C)).getText());
+                jsonBody.put("id", que.getId());
+                ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            break;
 
-            default:
+        default:
 
         }
         if (jsonBody != null) {
@@ -339,7 +358,8 @@ public class ThiTuDo<a> extends AppCompatActivity {
 
     private int findIndex(View[] a, View view) {
         for (int i = 0; i < a.length; i++) {
-            if (a[i] == view) return i;
+            if (a[i] == view)
+                return i;
         }
         return -1;
     }

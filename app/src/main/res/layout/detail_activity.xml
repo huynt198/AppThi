@@ -19,6 +19,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/image_prative"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:maxHeight="200dp"
+        android:maxWidth="200dp"
+
+        />
 
     <TextView
         android:id="@+id/message"

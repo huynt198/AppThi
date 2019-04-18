@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(model.getString(4)+"mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
             CONST.user.setName(model.getString(1));
             CONST.user.setToken(model.getString(4));
+            CONST.user.setEmail(model.getString(2));
             Intent intent = new Intent(MainActivity.this, Main2Activity.class);
             startActivity(intent);
             finish();

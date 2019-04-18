@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,6 +25,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.thi.ui.detail.DetailFragment;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +38,7 @@ import java.util.Map;
 public class detail extends AppCompatActivity {
 
     Question question = new Question();
-
+     float screen_width;
 
     private void clicek() {
         final ProgressDialog progress;
@@ -53,6 +57,7 @@ public class detail extends AppCompatActivity {
         final RadioButton C = ((RadioButton) findViewById(R.id.C));
         final RadioGroup Ans = (RadioGroup) findViewById(R.id.ans);
         final TextView message = (TextView) findViewById(R.id.message);
+        final ImageView image_prative = (ImageView) findViewById(R.id.image_prative);
 
         // Handle the camera action
         Log.d("cameraaaaaaaaa", "------------------------------------------");
@@ -68,6 +73,13 @@ public class detail extends AppCompatActivity {
 
                     JSONArray a = (JSONArray) response.get("data");
                     JSONObject ques = a.getJSONObject(0);
+                    image_prative.setVisibility(View.GONE);
+                    if (ques.has("url")) {
+                        image_prative.setVisibility(View.VISIBLE);
+                        Picasso.with(detail.this).load(ques.getString("url")).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                                .into(image_prative);
+                    }
+
                     JSONArray answer = (JSONArray) ques.get("answer");
                     question.setId(ques.get("_id").toString());
                     System.out.println(a.toString());
@@ -76,6 +88,7 @@ public class detail extends AppCompatActivity {
                     A.setText("A :" + answer.getJSONObject(0).get("A").toString());
                     B.setText("B :" + answer.getJSONObject(1).get("B").toString());
                     C.setText("C :" + answer.getJSONObject(2).get("C").toString());
+
 
                 } catch (JSONException e) {
 
@@ -111,10 +124,16 @@ public class detail extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        screen_width = metrics.widthPixels;
+
+
         clicek();
 
 
@@ -228,6 +247,19 @@ public class detail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 clicek();
+            }
+        });
+        ((ImageView) findViewById(R.id.image_prative)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                float scale =  screen_width / view.getWidth();
+                if(view.getScaleX() == 1) {
+                    view.setScaleY(scale);
+                    view.setScaleX(scale);
+                }else{
+                    view.setScaleY(1);
+                    view.setScaleX(1);
+                }
             }
         });
     }

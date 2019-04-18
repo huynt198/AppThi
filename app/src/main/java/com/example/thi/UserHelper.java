@@ -39,8 +39,8 @@ public class UserHelper extends SQLiteOpenHelper {
         getWritableDatabase().insert("users", "token", c);
     }
 
-    public int delete(String email) {
+    public Boolean delete(String email) {
 //        String sql="DELETE FROM users WHERE email='"+email+"'";
-        return getWritableDatabase().delete("users", "email='"+email+"'", null);
+        return getWritableDatabase().delete("users", "email='"+email+"'", null)>0;
     }
 }

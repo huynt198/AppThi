@@ -12,6 +12,6 @@ public class CONST {
     public  static  String id_exam;
     public static Question[] exam= new Question[50];
 
-    public static String url_test = "http://192.168.42.111:8000/api/";
+    public static String url_test = "http://192.168.19.101:8000/api/";
     public static String url = "http://thionline-test.herokuapp.com/api/";
 }

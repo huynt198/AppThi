@@ -1,17 +1,23 @@
 package com.example.thi;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
@@ -38,7 +44,13 @@ import java.util.Map;
 public class detail extends AppCompatActivity {
 
     Question question = new Question();
-     float screen_width;
+    float screen_width;
+    String[] subjectes = {"Toan", "Ly", "Hoa"};
+    String subject = "Toan";
+    String[] classes = {"12", "11", "10"};
+    String clas = "12";
+    String[] levels = {"De", "Trung binh", "Kho"};
+    String level = "1";
 
     private void clicek() {
         final ProgressDialog progress;
@@ -52,6 +64,7 @@ public class detail extends AppCompatActivity {
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+
         final RadioButton A = (RadioButton) findViewById(R.id.A);
         final RadioButton B = ((RadioButton) findViewById(R.id.B));
         final RadioButton C = ((RadioButton) findViewById(R.id.C));
@@ -61,8 +74,16 @@ public class detail extends AppCompatActivity {
 
         // Handle the camera action
         Log.d("cameraaaaaaaaa", "------------------------------------------");
-        String url = "http://thionline-test.herokuapp.com/api/next_question";
+        String url = CONST.url_test+"get_question";
         JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("subject",subject);
+            jsonBody.put("level",level);
+            jsonBody.put("class",clas);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
             @Override
@@ -72,26 +93,37 @@ public class detail extends AppCompatActivity {
                 try {
 
                     JSONArray a = (JSONArray) response.get("data");
-                    JSONObject ques = a.getJSONObject(0);
-                    image_prative.setVisibility(View.GONE);
-                    if (ques.has("url")) {
-                        image_prative.setVisibility(View.VISIBLE);
-                        Picasso.with(detail.this).load(ques.getString("url")).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                                .into(image_prative);
+                    if(a.length()==0){
+                        message.setText("No data to display, please chose another");
+                        A.setText("");
+                        B.setText("");
+                        C.setText("");
+                        image_prative.setVisibility(View.GONE);
+                        ((Button)findViewById(R.id.check)).setEnabled(false);
                     }
+                    else{
+                        ((Button)findViewById(R.id.check)).setEnabled(true);
+                        JSONObject ques = a.getJSONObject(0);
+                        image_prative.setVisibility(View.GONE);
+                        if (ques.has("url")) {
+                            image_prative.setVisibility(View.VISIBLE);
+                            Picasso.with(detail.this).load(ques.getString("url")).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                                    .into(image_prative);
+                        }
 
-                    JSONArray answer = (JSONArray) ques.get("answer");
-                    question.setId(ques.get("_id").toString());
-                    System.out.println(a.toString());
-                    Ans.clearCheck();
-                    message.setText(ques.get("question").toString());
-                    A.setText("A :" + answer.getJSONObject(0).get("A").toString());
-                    B.setText("B :" + answer.getJSONObject(1).get("B").toString());
-                    C.setText("C :" + answer.getJSONObject(2).get("C").toString());
+                        JSONArray answer = (JSONArray) ques.get("answer");
+                        question.setId(ques.get("_id").toString());
+                        System.out.println(a.toString());
+                        Ans.clearCheck();
+                        message.setText(ques.get("question").toString());
+                        A.setText("A :" + answer.getJSONObject(0).get("A").toString());
+                        B.setText("B :" + answer.getJSONObject(1).get("B").toString());
+                        C.setText("C :" + answer.getJSONObject(2).get("C").toString());
+
+                    }
 
 
                 } catch (JSONException e) {
-
 
                     e.printStackTrace();
                 }
@@ -133,7 +165,76 @@ public class detail extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screen_width = metrics.widthPixels;
 
+        Spinner spinner_classes = (Spinner) findViewById(R.id.spinner_class);
 
+        Spinner spinner_subjectes = (Spinner) findViewById((R.id.spinner_subject));
+
+
+        Spinner spinner_levels = (Spinner) findViewById(R.id.spinner_level);
+
+
+        ArrayAdapter<String> adapterClasses = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, classes);
+        adapterClasses.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinner_classes.setAdapter(adapterClasses);
+
+
+        ArrayAdapter<String> adapterSubjectes = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, subjectes);
+        adapterSubjectes.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinner_subjectes.setAdapter(adapterSubjectes);
+
+
+        ArrayAdapter<String> adapterLevels = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, levels);
+        adapterSubjectes.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinner_levels.setAdapter(adapterLevels);
+
+
+        spinner_classes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("class", parent.getItemAtPosition(position).toString());
+               clas=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinner_subjectes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("sublect", parent.getItemAtPosition(position).toString());
+                subject=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        spinner_levels.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("levels", parent.getItemAtPosition(position).toString());
+                switch (parent.getItemAtPosition(position).toString()){
+                    case "De":{
+                        level="1";break;
+                    }
+                    case "Trung binh":{
+                        level="2";break;
+                    }
+                    case "Kho":{
+                        level="3";break;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         clicek();
 
 
@@ -252,11 +353,11 @@ public class detail extends AppCompatActivity {
         ((ImageView) findViewById(R.id.image_prative)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                float scale =  screen_width / view.getWidth();
-                if(view.getScaleX() == 1) {
+                float scale = screen_width / view.getWidth();
+                if (view.getScaleX() == 1) {
                     view.setScaleY(scale);
                     view.setScaleX(scale);
-                }else{
+                } else {
                     view.setScaleY(1);
                     view.setScaleX(1);
                 }

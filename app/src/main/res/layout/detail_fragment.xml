@@ -5,21 +5,25 @@
     android:id="@+id/detail"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-
+android:layout_margin="10dp"
     tools:context=".ui.detail.DetailFragment">
 
     <TableLayout
         android:id="@+id/cauhoi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/abcd"
         android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
         android:layout_margin="10dp"
-        android:paddingTop="10dp">
+        android:paddingTop="10dp"
+
+        >
 
 
         <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:layout_marginTop="-8dp"
             android:layout_marginRight="-8dp"
             android:layout_marginBottom="-8dp">
@@ -43,7 +47,8 @@
 
             <Button
                 android:id="@+id/send"
-                style="@style/Widget.AppCompat.Button"
+                android:layout_margin="5dp"
+                android:background="@drawable/button_answer"
 
 
                 android:text="Nop bai" />
@@ -52,70 +57,75 @@
 
         <TableRow>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/cauhoi"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
+            <ScrollView android:layout_height="match_parent">
 
 
-                >
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:maxHeight="200dp"
-                    android:maxWidth="200dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-                    />
+                    android:orientation="vertical"
 
-                <TextView
-                    android:id="@+id/message"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DetailFragment"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <RadioGroup
-                    android:id="@+id/ans"
-                    android:layout_width="417dp"
-                    android:layout_height="wrap_content">
+                    >
 
-                    <RadioButton
-                        android:id="@+id/A"
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+
+
+                        />
+
+                    <TextView
+                        android:id="@+id/message"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="A" />
+                        android:text="DetailFragment"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <RadioButton
-                        android:id="@+id/B"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="B" />
+                    <RadioGroup
+                        android:id="@+id/ans"
+                        android:layout_width="417dp"
+                        android:layout_height="wrap_content">
 
-                    <RadioButton
-                        android:id="@+id/C"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="C" />
-                </RadioGroup>
+                        <RadioButton
+                            android:id="@+id/A"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="A" />
+
+                        <RadioButton
+                            android:id="@+id/B"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="B" />
+
+                        <RadioButton
+                            android:id="@+id/C"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="C" />
+                    </RadioGroup>
 
 
-            </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+
         </TableRow>
     </TableLayout>
 
 
     <TableLayout
+        android:id="@+id/abcd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-       >
+        android:layout_marginBottom="5dp">
 
         <TableRow>
 
@@ -123,34 +133,35 @@
             <Button
 
                 android:id="@+id/a0"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
 
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="01"
-                android:textColor="#696969"
+                android:textColor="#ffffff"
                 android:textSize="15sp"
                 tools:ignore="OnClick" />
 
             <Button
 
                 android:id="@+id/a1"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
 
+
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="02"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15sp"
                 tools:background="#45725A5A"
                 tools:ignore="OnClick" />
@@ -159,115 +170,131 @@
 
 
                 android:id="@+id/a2"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+
+
                 android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="03"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:background="#45725A5A"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a3"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="04"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a4"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="05"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a5"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="06"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a6"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="07"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a7"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="08"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a8"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="09"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a9"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="10"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
         </TableRow>
@@ -277,141 +304,161 @@
 
             <Button
                 android:id="@+id/a10"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="11"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a11"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="12"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a12"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="13"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a13"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="14"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a14"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="15"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a15"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="16"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a16"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="17"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a17"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="18"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a18"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="19"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a19"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="20"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
         </TableRow>
@@ -421,142 +468,162 @@
 
             <Button
                 android:id="@+id/a20"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="21"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
 
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a21"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="22"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a22"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="23"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a23"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="24"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a24"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="25"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a25"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="26"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a26"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="27"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a27"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="28"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a28"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="29"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a29"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="30"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
         </TableRow>
@@ -566,141 +633,161 @@
 
             <Button
                 android:id="@+id/a30"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="31"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a31"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="32"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a32"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="33"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a33"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="34"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a34"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="35"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a35"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="36"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a36"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="37"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a37"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="38"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a38"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="39"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a39"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="40"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
         </TableRow>
@@ -710,141 +797,161 @@
 
             <Button
                 android:id="@+id/a40"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="41"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a41"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="42"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a42"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="43"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a43"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="44"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a44"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="45"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a45"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="46"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a46"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="47"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a47"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="48"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a48"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="49"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
 
             <Button
                 android:id="@+id/a49"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_height="match_parent"
-                android:layout_marginTop="-8dp"
-                android:layout_marginRight="-8dp"
-                android:layout_marginBottom="-8dp"
+
+
+                android:layout_height="40dp"
+                android:layout_margin="3dp"
                 android:layout_weight=".1"
+
+                android:background="@drawable/button_answer"
                 android:onClick="add"
                 android:text="50"
-                android:textColor="#696969"
+
+                android:textColor="#ffffff"
                 android:textSize="15dp"
                 tools:ignore="OnClick" />
         </TableRow>

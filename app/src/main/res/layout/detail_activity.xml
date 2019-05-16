@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="10dp"
 
     tools:context=".detail">
 
@@ -26,6 +27,26 @@
 
         <TableRow>
 
+            <TextView
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:text="Subject" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:text="Level" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:text="Class" />
+
+
+        </TableRow>
+
+        <TableRow>
+
             <Spinner
                 android:id="@+id/spinner_subject"
                 android:layout_width="match_parent"
@@ -42,7 +63,6 @@
             </Spinner>
 
 
-
             <Spinner
                 android:id="@+id/spinner_class"
                 android:layout_width="match_parent"
@@ -52,72 +72,89 @@
     </TableLayout>
 
 
-
-
-
-    <ImageView
-        android:id="@+id/image_prative"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:maxWidth="200dp"
-        android:maxHeight="200dp"
-
-        />
-
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minHeight="100dp"
-        android:padding="20dp"
-        android:text="DetailFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <RadioGroup
-        android:id="@+id/ans"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp">
+        android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/A"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="A" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/B"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="B" />
+            <ImageView
+                android:id="@+id/image_prative"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
 
-        <RadioButton
-            android:id="@+id/C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="C" />
-    </RadioGroup>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+                />
 
-        <Button
-            android:id="@+id/check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CHECK">Check</Button>
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:padding="20dp"
+                android:text="DetailFragment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NEXT">Next
-        </Button>
-    </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <RadioButton
+                    android:id="@+id/A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A" />
+
+                <RadioButton
+                    android:id="@+id/B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B" />
+
+                <RadioButton
+                    android:id="@+id/C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="C" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_answer"
+                    android:layout_marginRight="10dp"
+                    android:text="CHECK">Check</Button>
+
+                <Button
+                    android:id="@+id/next"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NEXT">Next
+                </Button>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
 </LinearLayout>

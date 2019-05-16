@@ -95,9 +95,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
             String ad = "a" + String.valueOf(i);
             int resID = getResources().getIdentifier(ad, "id", getPackageName());
             a[i] = (Button) findViewById(resID);
-            PorterDuffColorFilter redFilter = new PorterDuffColorFilter(Color.parseColor("#CDC9C9"),
-                    PorterDuff.Mode.MULTIPLY);
-            a[i].getBackground().setColorFilter(redFilter);
+
             result.put((Object) ao);
 
         }
@@ -313,7 +311,8 @@ public class ThiTuDo<a> extends AppCompatActivity {
             try {
                 jsonBody.put("answer", ((RadioButton) findViewById(R.id.A)).getText());
                 jsonBody.put("id", que.getId());
-                ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
+                ((Button) a[a2]).setTextColor(Color.parseColor("#000000"));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -322,7 +321,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
             try {
                 jsonBody.put("answer", ((RadioButton) findViewById(R.id.B)).getText());
                 jsonBody.put("id", que.getId());
-                ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
+                ((Button) a[a2]).setTextColor(Color.parseColor("#000000"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -331,7 +330,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
             try {
                 jsonBody.put("answer", ((RadioButton) findViewById(R.id.C)).getText());
                 jsonBody.put("id", que.getId());
-                ((Button) a[a2]).setTextColor(Color.parseColor("#FF3333"));
+                ((Button) a[a2]).setTextColor(Color.parseColor("#000000"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

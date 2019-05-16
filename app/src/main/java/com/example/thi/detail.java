@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -30,7 +31,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.thi.ui.detail.DetailFragment;
+//import com.example.thi.ui.detail.DetailFragment;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -72,14 +73,18 @@ public class detail extends AppCompatActivity {
         final TextView message = (TextView) findViewById(R.id.message);
         final ImageView image_prative = (ImageView) findViewById(R.id.image_prative);
 
+        A.setTextColor(Color.parseColor("#000000"));
+        B.setTextColor(Color.parseColor("#000000"));
+        C.setTextColor(Color.parseColor("#000000"));
+
         // Handle the camera action
         Log.d("cameraaaaaaaaa", "------------------------------------------");
-        String url = CONST.url_test+"get_question";
+        String url = CONST.url + "get_question";
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("subject",subject);
-            jsonBody.put("level",level);
-            jsonBody.put("class",clas);
+            jsonBody.put("subject", subject);
+            jsonBody.put("level", level);
+            jsonBody.put("class", clas);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -93,16 +98,18 @@ public class detail extends AppCompatActivity {
                 try {
 
                     JSONArray a = (JSONArray) response.get("data");
-                    if(a.length()==0){
+                    if (a.length() == 0) {
                         message.setText("No data to display, please chose another");
+
                         A.setText("");
+
                         B.setText("");
+
                         C.setText("");
                         image_prative.setVisibility(View.GONE);
-                        ((Button)findViewById(R.id.check)).setEnabled(false);
-                    }
-                    else{
-                        ((Button)findViewById(R.id.check)).setEnabled(true);
+                        ((Button) findViewById(R.id.check)).setEnabled(false);
+                    } else {
+                        ((Button) findViewById(R.id.check)).setEnabled(true);
                         JSONObject ques = a.getJSONObject(0);
                         image_prative.setVisibility(View.GONE);
                         if (ques.has("url")) {
@@ -161,9 +168,7 @@ public class detail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        screen_width = metrics.widthPixels;
+
 
         Spinner spinner_classes = (Spinner) findViewById(R.id.spinner_class);
 
@@ -192,7 +197,7 @@ public class detail extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("class", parent.getItemAtPosition(position).toString());
-               clas=parent.getItemAtPosition(position).toString();
+                clas = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -205,7 +210,7 @@ public class detail extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("sublect", parent.getItemAtPosition(position).toString());
-                subject=parent.getItemAtPosition(position).toString();
+                subject = parent.getItemAtPosition(position).toString();
             }
 
             @Override
@@ -217,15 +222,18 @@ public class detail extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("levels", parent.getItemAtPosition(position).toString());
-                switch (parent.getItemAtPosition(position).toString()){
-                    case "De":{
-                        level="1";break;
+                switch (parent.getItemAtPosition(position).toString()) {
+                    case "De": {
+                        level = "1";
+                        break;
                     }
-                    case "Trung binh":{
-                        level="2";break;
+                    case "Trung binh": {
+                        level = "2";
+                        break;
                     }
-                    case "Kho":{
-                        level="3";break;
+                    case "Kho": {
+                        level = "3";
+                        break;
                     }
                 }
             }
@@ -235,14 +243,14 @@ public class detail extends AppCompatActivity {
 
             }
         });
+
         clicek();
 
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, DetailFragment.newInstance())
-                    .commitNow();
-        }
+//        if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.container, DetailFragment.newInstance())
+//                    .commitNow();
+//        }
 
 
         ((Button) findViewById(R.id.check)).setOnClickListener(new View.OnClickListener() {
@@ -263,7 +271,7 @@ public class detail extends AppCompatActivity {
                 String url = "http://thionline-test.herokuapp.com/api/check_question";
                 JSONObject jsonBody = new JSONObject();
 
-                RadioGroup ans = (RadioGroup) findViewById(R.id.ans);
+                final RadioGroup ans = (RadioGroup) findViewById(R.id.ans);
                 switch (ans.getCheckedRadioButtonId()) {
 
                     case R.id.A:
@@ -313,6 +321,16 @@ public class detail extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         alertDialogBuilder.show();
+                        try {
+                            if(response.getString("message").equals("Chinh Xac")){
+                                ((RadioButton) findViewById(ans.getCheckedRadioButtonId())).setTextColor(Color.parseColor("#00DD00"));
+                            }
+                            else{
+                                ((RadioButton) findViewById(ans.getCheckedRadioButtonId())).setTextColor(Color.parseColor("#FF3300"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                         Log.d("resssssss", String.valueOf(response));
                     }
@@ -350,19 +368,8 @@ public class detail extends AppCompatActivity {
                 clicek();
             }
         });
-        ((ImageView) findViewById(R.id.image_prative)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                float scale = screen_width / view.getWidth();
-                if (view.getScaleX() == 1) {
-                    view.setScaleY(scale);
-                    view.setScaleX(scale);
-                } else {
-                    view.setScaleY(1);
-                    view.setScaleX(1);
-                }
-            }
-        });
+
+
     }
 
 }

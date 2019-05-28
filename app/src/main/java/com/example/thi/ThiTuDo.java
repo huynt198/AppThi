@@ -161,7 +161,7 @@ public class ThiTuDo<a> extends AppCompatActivity {
 
     private void send() {
         System.out.println(result.toString());
-        if (min >= 30) {
+        if (min >= 990) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ThiTuDo.this);
             alertDialogBuilder.setCancelable(true);
             // alertDialogBuilder.setIcon(R.drawable.ic_menu_send);

@@ -6,55 +6,47 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="10dp"
+    android:orientation="vertical"
 
     tools:context=".detail">
 
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hay co gang de tra loi dung cac cau nhe"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TableLayout
+    <LinearLayout
+        android:weightSum="3"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TableRow>
-
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
             <TextView
-                android:layout_width="100dp"
-                android:gravity="center"
-                android:text="Subject" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:gravity="center"
-                android:text="Level" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:gravity="center"
-                android:text="Class" />
-
-
-        </TableRow>
-
-        <TableRow>
-
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Môn học"
+                android:textColor="#000"
+                />
             <Spinner
+                android:gravity="center"
                 android:id="@+id/spinner_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
             </Spinner>
 
-
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Độ khó"
+                android:textColor="#000"
+                />
             <Spinner
                 android:id="@+id/spinner_level"
                 android:layout_width="match_parent"
@@ -62,19 +54,42 @@
 
             </Spinner>
 
-
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lớp"
+                android:textColor="#000"
+                />
             <Spinner
                 android:id="@+id/spinner_class"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></Spinner>
+                android:layout_height="wrap_content">
 
-        </TableRow>
-    </TableLayout>
+            </Spinner>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="7dp"
+        android:background="#000000"></TableRow>
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="500dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -127,34 +142,34 @@
                     android:text="C" />
             </RadioGroup>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_answer"
-                    android:layout_marginRight="10dp"
-                    android:text="CHECK">Check</Button>
-
-                <Button
-                    android:id="@+id/next"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/button_answer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NEXT">Next
-                </Button>
-            </LinearLayout>
         </LinearLayout>
 
 
     </ScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_answer"
+            android:text="CHECK">Kiểm tra</Button>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_answer"
+            android:text="NEXT">Câu tiếp
+        </Button>
+    </LinearLayout>
 </LinearLayout>

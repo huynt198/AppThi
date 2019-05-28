@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -50,6 +51,9 @@ public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Question question = new Question();
+    String id_toan="";
+    String id_ly="5cecb5b575044006c01cfc1a";
+    String id_hoa="5cecbb9275044006c01cfc1b";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +73,18 @@ public class Main2Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        ((ImageView)findViewById(R.id.vatly)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               thi(id_ly);
+            }
+        });
+        ((ImageView)findViewById(R.id.hoa)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thi(id_hoa);
+            }
+        });
     }
 
     @Override
@@ -118,9 +133,7 @@ public class Main2Activity extends AppCompatActivity
 
         if (id == R.id.homepage) {
 
-        } else if (id == R.id.setting) {
-
-        } else if (id == R.id.practice) {
+        }  else if (id == R.id.practice) {
 
             Intent intent = new Intent(Main2Activity.this, detail.class);
             startActivity(intent);
@@ -131,9 +144,7 @@ public class Main2Activity extends AppCompatActivity
         // else if (id == R.id.news) {
         //
         // }
-        else if (id == R.id.contact) {
-
-        } else if (id == R.id.logout) {
+        else if (id == R.id.logout) {
             if ((new UserHelper(this)).delete(CONST.user.getEmail()) ) {
                 CONST.user = new User();
                 Intent intent = new Intent(Main2Activity.this, MainActivity.class);
@@ -275,10 +286,61 @@ public class Main2Activity extends AppCompatActivity
 
             Intent intent = new Intent(Main2Activity.this, ThiTuDo.class);
             startActivity(intent);
-            finish();
+
         } else {
 
             checkexam("err");
         }
     }
+    private void thi( final String id){
+        final ProgressDialog progress;
+        progress = new ProgressDialog(Main2Activity.this);
+        progress.setTitle("Checking");
+
+        progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+        progress.show();
+
+
+        RequestQueue queue;
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
+        Network network = new BasicNetwork(new HurlStack());
+        queue = new RequestQueue(cache, network);
+        queue.start();
+
+        JSONObject text = new JSONObject();
+        try {
+            text.put("code",id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        final JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST,
+                CONST.url + "check_code_exam", text, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                progress.dismiss();
+                getexam(response, id);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error.toString());
+                progress.dismiss();
+
+                Toast.makeText(Main2Activity.this, "Vui long kiem tra lai", Toast.LENGTH_LONG);
+                checkexam("err");
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                final Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Beare " + CONST.user.getToken());// put your token here
+                return headers;
+            }
+        };
+        queue.add(jsonOblect);
+    }
+
 }

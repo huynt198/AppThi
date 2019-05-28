@@ -244,6 +244,7 @@ public class detail extends AppCompatActivity {
             }
         });
 
+
         clicek();
 
 //        if (savedInstanceState == null) {
@@ -271,6 +272,7 @@ public class detail extends AppCompatActivity {
                 String url = "http://thionline-test.herokuapp.com/api/check_question";
                 JSONObject jsonBody = new JSONObject();
 
+
                 final RadioGroup ans = (RadioGroup) findViewById(R.id.ans);
                 switch (ans.getCheckedRadioButtonId()) {
 
@@ -295,14 +297,10 @@ public class detail extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         break;
-                    default:
-                        try {
-                            jsonBody.put("answer", "A :--------------------------------------------------------------");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
 
                 }
+
+
                 try {
                     jsonBody.put("id_question", question.getId());
                 } catch (JSONException e) {
@@ -313,23 +311,28 @@ public class detail extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d("ereeeeeee", response.toString());
                         progress.cancel();
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(detail.this);
-                        alertDialogBuilder.setCancelable(true);
+//                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(detail.this);
+//                        alertDialogBuilder.setCancelable(true);
+//                        try {
+//                            alertDialogBuilder.setMessage(response.get("message").toString());
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                        alertDialogBuilder.show();
                         try {
-                            alertDialogBuilder.setMessage(response.get("message").toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        alertDialogBuilder.show();
-                        try {
-                            if(response.getString("message").equals("Chinh Xac")){
-                                ((RadioButton) findViewById(ans.getCheckedRadioButtonId())).setTextColor(Color.parseColor("#00DD00"));
+                            if (response.getString("message").equals("Chinh Xac")) {
+                                if ((RadioButton) findViewById(ans.getCheckedRadioButtonId()) == null) {
+                                    Toast.makeText(detail.this, "Vui lòng chọn  đáp án", Toast.LENGTH_LONG).show();
+                                } else
+                                    ((RadioButton) findViewById(ans.getCheckedRadioButtonId())).setTextColor(Color.parseColor("#00DD00"));
+                            } else {
+                                if ((RadioButton) findViewById(ans.getCheckedRadioButtonId()) == null) {
+                                    Toast.makeText(detail.this, "Vui lòng chọn  đáp án", Toast.LENGTH_LONG).show();
+                                } else
+                                    ((RadioButton) findViewById(ans.getCheckedRadioButtonId())).setTextColor(Color.parseColor("#FF3300"));
                             }
-                            else{
-                                ((RadioButton) findViewById(ans.getCheckedRadioButtonId())).setTextColor(Color.parseColor("#FF3300"));
-                            }
                         } catch (JSONException e) {
-                            e.printStackTrace();
+
                         }
 
                         Log.d("resssssss", String.valueOf(response));

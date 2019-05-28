@@ -7,39 +7,40 @@
         <item
 
             android:id="@+id/homepage"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/home"
             android:title="Home" />
         <item
             android:id="@+id/practice"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/pr"
 
             android:title="Practice" />
         <item
             android:id="@+id/exam"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/exam"
             android:title="Exam" />
         <!--<item-->
-            <!--android:id="@+id/myexam"-->
-            <!--android:icon="@drawable/ic_menu_manage"-->
-            <!--android:title="myExam" />-->
+        <!--android:id="@+id/myexam"-->
+        <!--android:icon="@drawable/ic_menu_manage"-->
+        <!--android:title="myExam" />-->
     </group>
 
     <!--<item android:title="Communicate">-->
-        <!--<menu>-->
-            <!--<item-->
-                <!--android:id="@+id/setting"-->
-                <!--android:icon="@drawable/ic_menu_share"-->
-                <!--android:title="Setting" />-->
-            <!--<item-->
-                <!--android:id="@+id/contact"-->
-                <!--android:icon="@drawable/ic_menu_send"-->
-                <!--android:title="Contact" />-->
-        <!--</menu>-->
+    <!--<menu>-->
+    <!--<item-->
+    <!--android:id="@+id/setting"-->
+    <!--android:icon="@drawable/ic_menu_share"-->
+    <!--android:title="Setting" />-->
+    <!--<item-->
+    <!--android:id="@+id/contact"-->
+    <!--android:icon="@drawable/ic_menu_send"-->
+    <!--android:title="Contact" />-->
+    <!--</menu>-->
     <!--</item>-->
     <item android:title="Logout">
         <menu>
             <item
                 android:id="@+id/logout"
+                android:icon="@drawable/logout"
 
                 android:title="Logout" />
 

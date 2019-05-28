@@ -1,0 +1,386 @@
+package com.example.thi;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
+
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonObjectRequest;
+//import com.example.thi.ui.detail.DetailFragment;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class detail extends AppCompatActivity {
+    Question question = new Question();
+    float screen_width;
+    // dữ liệu để thêm vào spinner subjectes
+    String[] subjectes = {"Toan", "Ly", "Hoa"};
+    String subject = "Toan";
+    // dữ liệu để thêm vào spiner class
+    String[] classes = {"12", "11", "10"};
+    String clas = "12";
+    // dữ liệu để thêm vào spiner level
+    String[] levels = {"De", "Trung binh", "Kho"};
+    String level = "1";
+
+    private void clicek() {
+        // tạo hiệu ứng loading khi tải dữ liệu về
+        final ProgressDialog progress;
+        progress = new ProgressDialog(detail.this);
+        progress.setTitle("Loading...");
+
+        progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+        progress.show();
+         // tạo hàng đợi để chứa các request xử lý đến sever
+        RequestQueue queue;
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
+        Network network = new BasicNetwork(new HurlStack());
+        queue = new RequestQueue(cache, network);
+        queue.start();
+        // tạo các radioButton các đáp án cho câu hỏi
+        final RadioButton A = (RadioButton) findViewById(R.id.A);
+        final RadioButton B = ((RadioButton) findViewById(R.id.B));
+        final RadioButton C = ((RadioButton) findViewById(R.id.C));
+        final RadioGroup Ans = (RadioGroup) findViewById(R.id.ans);
+
+        final TextView message = (TextView) findViewById(R.id.message);
+        final ImageView image_prative = (ImageView) findViewById(R.id.image_prative);
+         // thiết lập kiểu chữ và màu chữ cho các đáp án
+        A.setTextColor(Color.parseColor("#000000"));
+        B.setTextColor(Color.parseColor("#000000"));
+        C.setTextColor(Color.parseColor("#000000"));
+   
+        String url = CONST.url + "get_question";
+        JSONObject jsonBody = new JSONObject();
+        //put các tham số đầu vào theo yêu cầu của người dùng
+        try {
+            jsonBody.put("subject", subject);
+            jsonBody.put("level", level);
+            jsonBody.put("class", clas);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        
+
+
+        JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                progress.dismiss();
+                Log.d("ereeeeeee", response.toString());
+                try {
+        // Nếu các dữ liệu về message và đáp án trống thì không hiển thị hình ảnh và check button
+                    JSONArray a = (JSONArray) response.get("data");
+                    if (a.length() == 0) 
+                    {
+                        message.setText("No data to display, please chose another");
+
+                        A.setText("");
+
+                        B.setText("");
+
+                        C.setText("");
+                        image_prative.setVisibility(View.GONE);
+                        ((Button) findViewById(R.id.check)).setEnabled(false);
+                    } 
+        // Nếu dữ liệu đầy đủ thì lấy url hiển thị ảnh( nếu có) và load câu hỏi   
+                    else {
+                        ((Button) findViewById(R.id.check)).setEnabled(true);
+                        JSONObject ques = a.getJSONObject(0);
+                        image_prative.setVisibility(View.GONE);
+                        if (ques.has("url")) {
+                            image_prative.setVisibility(View.VISIBLE);
+                            Picasso.with(detail.this).load(ques.getString("url")).memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                                    .into(image_prative);
+                        }
+                    
+        // Cập nhật câu trả lời theo từng đáp án lên view
+                        JSONArray answer = (JSONArray) ques.get("answer");
+                        question.setId(ques.get("_id").toString());
+                        System.out.println(a.toString());
+                        Ans.clearCheck();
+                        message.setText(ques.get("question").toString());
+                        A.setText("A :" + answer.getJSONObject(0).get("A").toString());
+                        B.setText("B :" + answer.getJSONObject(1).get("B").toString());
+                        C.setText("C :" + answer.getJSONObject(2).get("C").toString());
+
+                    }
+                    
+
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+                Log.d("resssssss", String.valueOf(response));
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+        // thông báo lỗi "Loi ket noi" 
+                progress.dismiss();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(detail.this);
+                alertDialogBuilder.setCancelable(true);
+
+                alertDialogBuilder.setMessage("Loi ket noi");
+                alertDialogBuilder.show();
+            }
+        })
+        
+         {
+            @Override
+        // thêm token vào header đối với các reques cần xác thực
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                final Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Beare " + CONST.user.getToken());//put your token here
+                return headers;
+            }
+        };
+        queue.add(jsonOblect);
+        Log.d("out", "9999999999999999999999999999999999999");
+      
+
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.detail_activity);
+
+        // gán các giá trị id cho các spinner subjectes, classes, levels
+        Spinner spinner_classes = (Spinner) findViewById(R.id.spinner_class);
+
+        Spinner spinner_subjectes = (Spinner) findViewById((R.id.spinner_subject));
+
+
+        Spinner spinner_levels = (Spinner) findViewById(R.id.spinner_level);
+
+        
+        // Cập nhật giá trị khởi tạo ban đầu vào spinner classes
+        ArrayAdapter<String> adapterClasses = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, classes);
+        adapterClasses.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinner_classes.setAdapter(adapterClasses);
+        // Cập nhật giá trị khởi tạo ban đầu vào spinner subjectes
+        ArrayAdapter<String> adapterSubjectes = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, subjectes);
+        adapterSubjectes.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinner_subjectes.setAdapter(adapterSubjectes);
+        
+        // Cập nhật giá trị khởi tạo ban đầu vào spinner level
+        ArrayAdapter<String> adapterLevels = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, levels);
+        adapterSubjectes.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        spinner_levels.setAdapter(adapterLevels);
+        
+        // Lấy các tham giá trị mà người dùng chọn trong spinner classes
+        spinner_classes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("class", parent.getItemAtPosition(position).toString());
+                clas = parent.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        
+        // Lấy các tham giá trị mà người dùng chọn trong spinner subjectes
+        spinner_subjectes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("sublect", parent.getItemAtPosition(position).toString());
+                subject = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        // Lấy các tham giá trị mà người dùng chọn trong spinner level
+        spinner_levels.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("levels", parent.getItemAtPosition(position).toString());
+               // tham chiếu cá giá trị De, Trung binh, Kho trong csdl
+                switch (parent.getItemAtPosition(position).toString()) {
+                    case "De": {
+                        level = "1";
+                        break;
+                    }
+                    case "Trung binh": {
+                        level = "2";
+                        break;
+                    }
+                    case "Kho": {
+                        level = "3";
+                        break;
+                    }
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        clicek();
+        // tạo sự kiện onclick check
+        ((Button) findViewById(R.id.check)).setOnClickListener(new View.OnClickListener()
+         {
+            @Override
+            public void onClick(View v) {
+        // tạo hiệu ứng checking khi gửi yêu cầu xử lý
+                final ProgressDialog progress;
+                progress = new ProgressDialog(detail.this);
+                progress.setTitle("Checking...");
+        
+
+                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                progress.show();
+                // tạo một hàng đợi chứa các yêu cầu gửi lên server
+                RequestQueue queue;
+                Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
+                Network network = new BasicNetwork(new HurlStack());
+                queue = new RequestQueue(cache, network);
+                queue.start();
+                String url = "http://thionline-test.herokuapp.com/api/check_question";
+                 // tạo đối tượng chứa các tham số của yêu cầu gửi lên server
+                JSONObject jsonBody = new JSONObject();
+                final RadioGroup ans = (RadioGroup) findViewById(R.id.ans);
+                // truyền các đáp án của câu hỏi mà người dùng đã chọn vào object đã tạo
+                switch (ans.getCheckedRadioButtonId()) {
+
+                    case R.id.A:
+                        try {
+                            jsonBody.put("answer", ((RadioButton) findViewById(R.id.A)).getText());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case R.id.B:
+                        try {
+                            jsonBody.put("answer", ((RadioButton) findViewById(R.id.B)).getText());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case R.id.C:
+                        try {
+                            jsonBody.put("answer", ((RadioButton) findViewById(R.id.C)).getText());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                }
+        // truyền id câu hỏi vào object đã tạo 
+                try {
+                    jsonBody.put("id_question", question.getId());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
+                    @Override
+                    // tạo hàm đợi hủy alertdialog khi có response trả về
+
+                    public void onResponse(JSONObject response) {
+                        Log.d("ereeeeeee", response.toString());
+                        progress.cancel();
+        // Nếu đáp án đúng đổi màu đáp án thành màu xanh, Nếu sai đổi thành màu đỏ.
+        // Nếu không chọn đáp án nào mà check thì sẽ hiển thị thông báo: " Vui lòng chọn  đáp án"
+                        try {
+                            if (response.getString("message").equals("Chinh Xac")) {
+                                if ((RadioButton) findViewById(ans.getCheckedRadioButtonId()) == null) {
+                                    Toast.makeText(detail.this, "Vui lòng chọn  đáp án", Toast.LENGTH_LONG).show();
+                                } else
+                                    ((RadioButton) findViewById(ans.getCheckedRadioButtonId())).setTextColor(Color.parseColor("#00DD00"));
+                            } else {
+                                if ((RadioButton) findViewById(ans.getCheckedRadioButtonId()) == null) {
+                                    Toast.makeText(detail.this, "Vui lòng chọn  đáp án", Toast.LENGTH_LONG).show();
+                                } else
+                                    ((RadioButton) findViewById(ans.getCheckedRadioButtonId())).setTextColor(Color.parseColor("#FF3300"));
+                            }
+                        } catch (JSONException e) {
+
+                        }
+       
+        
+                        Log.d("resssssss", String.valueOf(response));
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+        // Hiển thị thông báo lỗi kết nối nếu có
+                    public void onErrorResponse(VolleyError error) {
+                        progress.cancel();
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(detail.this);
+                        alertDialogBuilder.setCancelable(true);
+//                        alertDialogBuilder.setIcon(R.drawable.ic_menu_send);
+
+                        alertDialogBuilder.setMessage("Loi ket noi");
+                        alertDialogBuilder.show();
+
+                    }
+                }) 
+                // thêm token và header đối với các reques cần xác thực
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        final Map<String, String> headers = new HashMap<>();
+                        headers.put("Authorization", "Beare " + CONST.user.getToken());//put your token here
+                        return headers;
+                    }
+                };
+                queue.add(jsonOblect);
+                Log.d("out", "9999999999999999999999999999999999999");
+
+
+            }
+        });
+        // Tạo buttong next sang câu hỏi tiếp theo
+        ((Button) findViewById(R.id.next)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clicek();
+            }
+        });
+
+
+    }
+
+}

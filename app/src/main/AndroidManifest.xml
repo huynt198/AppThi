@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.thi">
-
+    //cấp quyền truy cập internet
     <uses-permission android:name="android.permission.INTERNET" />
 
-
+    //khai báo các activity và ngăn không cho load lại activity khi xoay màn hình
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
@@ -16,7 +15,6 @@
         <activity
             android:name=".ThiTuDo"
             android:configChanges="keyboardHidden|orientation|screenSize"
-
             ></activity>
         <activity
             android:name=".detail"

@@ -3,6 +3,7 @@ package com.example.thi;
 import java.util.ArrayList;
 
 public class Question {
+    //tạo class Question
     private String id;
     private String question;
     private String img;

@@ -39,7 +39,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     UserHelper helper;
     Cursor model = null;
-
+    //ngắt kết nối scdl sau khi sử dụng
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -50,33 +50,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //gọi hàm để đọc csdl
         helper = new UserHelper(this);
+        //lấy dữ liệu người dùng trong csdl
         model = helper.getUser();
-
+        //kiểm tra xem người dùng đã đăng nhập hay chưa, nếu đăng nhập  rồi thì chuyển qua activity khác, nếu chưa thì yêu cầu đăng nhập
         if (!model.moveToNext()) {
             Button save = (Button) findViewById(R.id.save);
             save.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    //open dialog loading
+                    //mở dialog loading
                     final ProgressDialog progress;
                     progress = new ProgressDialog(MainActivity.this);
                     progress.setTitle("Loading");
                     progress.setMessage("Wait while loading...");
-                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                    progress.setCancelable(false);
                     progress.show();
-// To dismiss the dialog
-//                progress.dismiss();
                     Log.d("test", "-------------------------------------------------------");
+                    //tạo RequesQueue quản lý các request đến server
                     RequestQueue que;
                     Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
                     Network network = new BasicNetwork(new HurlStack());
                     que = new RequestQueue(cache, network);
                     que.start();
-
-
+                    //tạo JSON chứa thông tin để gủi lên server
                     JSONObject jsonBody = new JSONObject();
+                    //đẩy dữ liệu vào trong JSON
                     try {
                         jsonBody.put("email", ((TextView) findViewById(R.id.username)).getText().toString());
                     } catch (JSONException e) {
@@ -88,22 +89,28 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     String url = "http://thionline-test.herokuapp.com/api/login";
-
+                    //tạo yêu cầu lên server
                     JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.d("ereeeeeee", response.toString());
                             try {
-
-
+                                //Xử lý kết quả trả về
+                                //kết quả trả về dạng:  {
+                                // code:number,
+                                // data:token,
+                                // name: name,
+                                // email:email
+                                // }
                                 if (response.get("data").toString().length() > 0) {
                                     CONST.user.setToken(response.get("data").toString());
                                     CONST.user.setName(response.get("name").toString());
                                     CONST.user.setEmail(((TextView) findViewById(R.id.username)).getText().toString());
-//                                ((TextView) findViewById(R.id.nameuser)).setText(response.get("name").toString());
                                     Log.d("res", "thanh cong");
                                     Toast.makeText(MainActivity.this, "dang nhap thanh cong", Toast.LENGTH_LONG);
+                                    //sau khi đăng nhập thành công thì gọi hàm luu vào csdl
                                     helper.insert(CONST.user);
+                                    //chuyển activity
                                     Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                                     startActivity(intent);
                                     finish();
@@ -124,16 +131,14 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     }, new Response.ErrorListener() {
+                        //thông báo lỗi kết nối nếu có
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progress.dismiss();
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                             alertDialogBuilder.setCancelable(true);
-//                        alertDialogBuilder.setIcon(R.drawable.ic_menu_send);
-
                             alertDialogBuilder.setMessage("Loi ket noi");
                             alertDialogBuilder.show();
-//                        onBackPressed();
 
                         }
                     }) {
@@ -144,41 +149,19 @@ public class MainActivity extends AppCompatActivity {
                             return headers;
                         }
                     };
+                    //thêm yêu cầu vào hàng đơi
                     que.add(jsonOblect);
 
-
-//                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-//                        new Response.Listener<String>() {
-//                            @Override
-//                            public void onResponse(String response) {
-//                                // Do something with the response
-//                                Log.d("res",response  );
-//                                Object re=response;
-//                                TextView name=(TextView)findViewById(R.id.name);
-//
-//                                if(response instanceof String){
-//                                    Log.d("res","toString"  );
-//                                }else{
-//                                    Log.d("res","anthor"  );
-//                                }
-//                            }
-//                        },
-//                        new Response.ErrorListener() {
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                // Handle error
-//                                Log.d("loi internet",error.toString());
-//                            }
-//                        });
-//                que.add(stringRequest);
 
                 }
             });
         } else {
-            System.out.println(model.getString(4)+"mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+            System.out.println(model.getString(4) + "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm");
+            //lấy dữ liệu trong bộ nhớ để sử dụng
             CONST.user.setName(model.getString(1));
             CONST.user.setToken(model.getString(4));
             CONST.user.setEmail(model.getString(2));
+            //chuyển sang activity tiếp theo và hủy activity hiện tại
             Intent intent = new Intent(MainActivity.this, Main2Activity.class);
             startActivity(intent);
             finish();

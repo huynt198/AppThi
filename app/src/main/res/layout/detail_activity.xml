@@ -9,42 +9,47 @@
     android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".detail">
+
     <LinearLayout
-        android:weightSum="3"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Môn học"
-                android:textColor="#000"
-                />
+                android:textColor="#000" />
+
             <Spinner
-                android:gravity="center"
                 android:id="@+id/spinner_subject"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
             </Spinner>
 
         </LinearLayout>
+
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Độ khó"
-                android:textColor="#000"
-                />
+                android:textColor="#000" />
+
             <Spinner
                 android:id="@+id/spinner_level"
                 android:layout_width="match_parent"
@@ -53,17 +58,19 @@
             </Spinner>
 
         </LinearLayout>
+
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lớp"
-                android:textColor="#000"
-                />
+                android:textColor="#000" />
+
             <Spinner
                 android:id="@+id/spinner_class"
                 android:layout_width="match_parent"
@@ -110,8 +117,7 @@
                 android:padding="20dp"
                 android:text=""
                 android:textColor="#000"
-                android:textSize="21dp"
-              />
+                android:textSize="21dp" />
 
 
             <RadioGroup
@@ -144,6 +150,7 @@
 
 
     </ScrollView>
-    <include layout="@layout/footer"/>
+
+    <include layout="@layout/footer" />
 
 </LinearLayout>

@@ -9,12 +9,13 @@
     android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".detail">
-
+<!--Layout chưa các option của người dùng-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="3">
+        <!--Môn học-->
 
         <LinearLayout
             android:layout_width="0dp"
@@ -38,6 +39,7 @@
 
         </LinearLayout>
 
+        <!--Độ khó-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -58,6 +60,7 @@
             </Spinner>
 
         </LinearLayout>
+        <!--Khối lớp-->
 
         <LinearLayout
             android:layout_width="0dp"
@@ -81,6 +84,7 @@
         </LinearLayout>
 
     </LinearLayout>
+    <!--Tạo khoảng cách giữa option va câu hỏi-->
 
     <TableRow
         android:layout_width="match_parent"
@@ -91,7 +95,7 @@
         android:layout_marginBottom="7dp"
         android:background="#000000"></TableRow>
 
-
+<!--câu hỏi nằm trong ScrollView để người dùng có thể quận xuống khi câu hỏi quá dài-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="500dp">
@@ -100,15 +104,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <!--Hình ảnh của câu hỏi-->
 
             <ImageView
                 android:id="@+id/image_prative"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
 
-
                 />
 
+            <!--Câu hỏi-->
             <TextView
                 android:id="@+id/message"
                 android:layout_width="wrap_content"
@@ -118,8 +123,9 @@
                 android:text=""
                 android:textColor="#000"
                 android:textSize="21dp" />
+            <!--các đáp án trả lời-->
 
-
+            <!--Mỗi đáp án ứng với 1 radiobutton người dùng sẽ tích vào radiobutton ứng với lựa chọn của mình-->
             <RadioGroup
                 android:id="@+id/ans"
                 android:layout_width="match_parent"
@@ -150,7 +156,7 @@
 
 
     </ScrollView>
-
+<!--Nút check đáp án và chuyển câu-->
     <include layout="@layout/footer" />
 
 </LinearLayout>

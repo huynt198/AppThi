@@ -51,17 +51,15 @@ public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Question question = new Question();
-    String id_toan="";
-    String id_ly="5cecb5b575044006c01cfc1a";
-    String id_hoa="5cecbb9275044006c01cfc1b";
+    String id_toan = "5ced66754a1a0230b49e097e";
+    String id_ly = "5cecb5b575044006c01cfc1a";
+    String id_hoa = "5cecbb9275044006c01cfc1b";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        // ((TextView) findViewById(R.id.nameuser)).setText(CONST.user.getName());
 
         setSupportActionBar(toolbar);
 
@@ -73,16 +71,22 @@ public class Main2Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        ((ImageView)findViewById(R.id.vatly)).setOnClickListener(new View.OnClickListener() {
+        ((ImageView) findViewById(R.id.vatly)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               thi(id_ly);
+                thi(id_ly);
             }
         });
-        ((ImageView)findViewById(R.id.hoa)).setOnClickListener(new View.OnClickListener() {
+        ((ImageView) findViewById(R.id.hoa)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 thi(id_hoa);
+            }
+        });
+        ((ImageView) findViewById(R.id.toan)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thi(id_toan);
             }
         });
     }
@@ -111,15 +115,8 @@ public class Main2Activity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        // noinspection SimplifiableIfStatement
-        // if (id == R.id.action_settings) {
-        // return true;
-        // }
+        int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
     }
@@ -133,19 +130,20 @@ public class Main2Activity extends AppCompatActivity
 
         if (id == R.id.homepage) {
 
-        }  else if (id == R.id.practice) {
-
+        } else if (id == R.id.practice) {
+//chuyển activity tương ứng
             Intent intent = new Intent(Main2Activity.this, detail.class);
             startActivity(intent);
         } else if (id == R.id.exam) {
-
+//hiển thi diaolog nhập mã đề thi
             checkexam("ok");
         }
         // else if (id == R.id.news) {
         //
         // }
         else if (id == R.id.logout) {
-            if ((new UserHelper(this)).delete(CONST.user.getEmail()) ) {
+            //logout và chuyển về activity đăng nhập
+            if ((new UserHelper(this)).delete(CONST.user.getEmail())) {
                 CONST.user = new User();
                 Intent intent = new Intent(Main2Activity.this, MainActivity.class);
                 startActivity(intent);
@@ -160,6 +158,7 @@ public class Main2Activity extends AppCompatActivity
     }
 
     private void checkexam(String err) {
+        //hiển thị diaolog nhập mã đề thi
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Nhap ma de thi");
@@ -175,6 +174,7 @@ public class Main2Activity extends AppCompatActivity
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //hiển thị checking đề thi
                 final ProgressDialog progress;
                 progress = new ProgressDialog(Main2Activity.this);
                 progress.setTitle("Checking");
@@ -183,13 +183,13 @@ public class Main2Activity extends AppCompatActivity
                 progress.show();
                 final String test = input.getText().toString();
                 System.out.println("-------------" + test.length());
-
+//Tạo hàng đợi xử lý request
                 RequestQueue queue;
                 Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
                 Network network = new BasicNetwork(new HurlStack());
                 queue = new RequestQueue(cache, network);
                 queue.start();
-
+//tạo Object chứa các tham số truyền lên server
                 JSONObject text = new JSONObject();
                 try {
                     text.put("code", input.getText().toString());
@@ -198,24 +198,24 @@ public class Main2Activity extends AppCompatActivity
                 }
                 final JsonObjectRequest jsonOblect = new JsonObjectRequest(Request.Method.POST,
                         CONST.url + "check_code_exam", text, new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
+                    @Override
+                    public void onResponse(JSONObject response) {
+//gọi hàm xử lý kết quả trả về
+                        progress.dismiss();
+                        getexam(response, test);
 
-                                progress.dismiss();
-                                getexam(response, test);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error.toString());
+                        progress.dismiss();
+//thông báo lloix
+                        Toast.makeText(Main2Activity.this, "Vui long kiem tra lai", Toast.LENGTH_LONG);
+                        checkexam("err");
 
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                System.out.println(error.toString());
-                                progress.dismiss();
-
-                                Toast.makeText(Main2Activity.this, "Vui long kiem tra lai", Toast.LENGTH_LONG);
-                                checkexam("err");
-
-                            }
-                        }) {
+                    }
+                }) {
                     @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
                         final Map<String, String> headers = new HashMap<>();
@@ -233,17 +233,19 @@ public class Main2Activity extends AppCompatActivity
                 dialog.cancel();
             }
         });
-
+//hiển thị dialog
         builder.show();
     }
 
     private void getexam(JSONObject response, String test) {
+        //xử lý kết quả khi check mã  đề thi
         String code = "9999";
         try {
             code = response.getString("code").toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        //nếu mã dề thi tồn tại thì sẽ lấy dữ liệu đổ vào biến trong hệ thống
         if (code.equals("1000")) {
             CONST.id_exam = test;
             System.out.println(response.toString());
@@ -251,6 +253,8 @@ public class Main2Activity extends AppCompatActivity
                 JSONArray data = (JSONArray) ((JSONObject) ((JSONArray) response.getJSONArray("data")).getJSONObject(0))
                         .getJSONArray("questions");
                 for (int i = 0; i < data.length(); i++) {
+                    //tạo 1 đối tuong câu hỏi rooig gán giá trị sau đó lưu vào mảng để sử dụng
+                    //xử dụng JSONObject và JSONArray để tách data
                     Question a = new Question();
                     JSONObject question = (JSONObject) data.getJSONObject(i);
                     JSONArray answer = ((JSONArray) question.getJSONArray("answer"));
@@ -263,20 +267,8 @@ public class Main2Activity extends AppCompatActivity
                         a.setImg(question.getString("url"));
                     else
                         a.setImg("");
-
+//lưu vào mảng
                     CONST.exam[i] = a;
-
-                }
-                for (Integer j = data.length(); j < 50; j++) {
-                    Question ag = new Question();
-                    Integer d = j + 1;
-                    ag.setId(d.toString());
-                    ag.setST1("sdf");
-                    ag.setST2("asdf");
-                    ag.setQuestion("324324");
-                    ag.setST3("Wdgf");
-                    ag.setImg("");
-                    CONST.exam[j] = ag;
 
                 }
 
@@ -287,29 +279,34 @@ public class Main2Activity extends AppCompatActivity
             Intent intent = new Intent(Main2Activity.this, ThiTuDo.class);
             startActivity(intent);
 
-        } else {
+        } else
+            //nếu mã đề thi sai thì thông báo cho nguoid dùng và yêu cầu nhập lại
+            {
 
             checkexam("err");
         }
     }
-    private void thi( final String id){
+
+    private void thi(final String id) {
+        //đối với các đề thi dc fix săn ở giao diện khi click vào sẽ có giá trị code tương ứng mà ko cần nhập mã đề
         final ProgressDialog progress;
         progress = new ProgressDialog(Main2Activity.this);
         progress.setTitle("Checking");
 
         progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
         progress.show();
-
+//tạo hàng đợi xử lý request
 
         RequestQueue queue;
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024);
         Network network = new BasicNetwork(new HurlStack());
         queue = new RequestQueue(cache, network);
         queue.start();
+        //tạo đối tượng chưa các tham số lên server
 
         JSONObject text = new JSONObject();
         try {
-            text.put("code",id);
+            text.put("code", id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -319,6 +316,7 @@ public class Main2Activity extends AppCompatActivity
             public void onResponse(JSONObject response) {
 
                 progress.dismiss();
+                //gọi hàm xử lý kết quả từ server
                 getexam(response, id);
 
             }
@@ -340,6 +338,7 @@ public class Main2Activity extends AppCompatActivity
                 return headers;
             }
         };
+        //thêm vao hầng đợi
         queue.add(jsonOblect);
     }
 

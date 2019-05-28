@@ -7,7 +7,7 @@
     android:gravity="center">
 
 
-
+<!--sử dụng tableLayout để căn vị trí các phần trử-->
     <TableLayout
         android:id="@+id/details"
         android:layout_width="fill_parent"
@@ -15,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:stretchColumns="1">
         <TableRow android:gravity="center">
+            <!--Ảnh đại diện của ứng dụng-->
 
             <ImageView
                 android:layout_width="200dp"
@@ -28,6 +29,7 @@
             android:padding="20dp">
 
             <LinearLayout android:background="@drawable/input">
+                <!--input text để nhâp username -->
 
                 <EditText
                     android:id="@+id/username"
@@ -47,7 +49,7 @@
             android:paddingBottom="20dp">
 
             <LinearLayout android:background="@drawable/input">
-
+                <!--input text để nhâp pasword -->
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="270dp"
@@ -66,6 +68,7 @@
         <TableRow
             android:layout_width="50dp"
             android:gravity="center">
+            <!--Nút login-->
 
             <Button
                 android:id="@+id/save"
